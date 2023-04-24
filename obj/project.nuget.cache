@@ -1,19 +1,44 @@
 {
   "version": 2,
-  "dgSpecHash": "9y0u8eV/rdNA28B2aVdOf4XN2iLgjqMuAOTYoW2EtAA6l2fAXviJ3PaeE3hCD4wNkMZAOlvn0IIgvFwmsikG+A==",
+  "dgSpecHash": "QTboBlH4+sxLVaya/i17R94F03T2L93W/TvhhYmua6V8pTDUeCA0+kGNwUcNV2cYe0+gW9BzClCnblatNnsifQ==",
   "success": true,
   "projectFilePath": "/Users/jacobkaae/Desktop/maintenance-service/maintenance-service/maintenance-service/maintenance-service.csproj",
   "expectedPackageFiles": [
     "/Users/jacobkaae/.nuget/packages/microsoft.aspnetcore.openapi/7.0.2/microsoft.aspnetcore.openapi.7.0.2.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/microsoft.extensions.configuration.abstractions/6.0.0/microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/microsoft.extensions.dependencyinjection/6.0.0/microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/microsoft.extensions.logging/6.0.0/microsoft.extensions.logging.6.0.0.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/nlog/5.1.3/nlog.5.1.3.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/nlog.extensions.logging/5.2.3/nlog.extensions.logging.5.2.3.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/nlog.targets.loki/1.4.6/nlog.targets.loki.1.4.6.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/nlog.web/5.2.3/nlog.web.5.2.3.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/nlog.web.aspnetcore/5.2.3/nlog.web.aspnetcore.5.2.3.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/rabbitmq.client/6.5.0/rabbitmq.client.6.5.0.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/jacobkaae/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/Users/jacobkaae/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'NLog.Web 5.2.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "NLog.Web",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
 }
