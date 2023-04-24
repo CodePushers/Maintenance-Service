@@ -1,0 +1,7 @@
+/Users/jacobkaae/Desktop/maintenance-service/maintenance-service/maintenance-service/obj/Debug/net7.0/maintenance-service.csproj.AssemblyReference.cache
+/Users/jacobkaae/Desktop/maintenance-service/maintenance-service/maintenance-service/obj/Debug/net7.0/maintenance-service.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jacobkaae/Desktop/maintenance-service/maintenance-service/maintenance-service/obj/Debug/net7.0/maintenance-service.AssemblyInfoInputs.cache
+/Users/jacobkaae/Desktop/maintenance-service/maintenance-service/maintenance-service/obj/Debug/net7.0/maintenance-service.AssemblyInfo.cs
+/Users/jacobkaae/Desktop/maintenance-service/maintenance-service/maintenance-service/obj/Debug/net7.0/maintenance-service.csproj.CoreCompileInputs.cache
+/Users/jacobkaae/Desktop/maintenance-service/maintenance-service/maintenance-service/obj/Debug/net7.0/maintenance-service.MvcApplicationPartsAssemblyInfo.cs
+/Users/jacobkaae/Desktop/maintenance-service/maintenance-service/maintenance-service/obj/Debug/net7.0/maintenance-service.MvcApplicationPartsAssemblyInfo.cache
