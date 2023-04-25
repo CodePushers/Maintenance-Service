@@ -80,7 +80,7 @@ public class MaintenanceController : ControllerBase
                                  body: body);
 
 
-            _logger.LogInformation("PlanDTO oprettet");
+            _logger.LogInformation($"PlanDTO oprettet");
 
             Console.WriteLine($"[*] Plan sendt:\n\tKundenavn: {planDTO.KundeNavn}\n\tStarttidspunkt: {planDTO.StartTidspunkt}\n\tStartsted: {planDTO.StartSted}\n\tSlutSted: {planDTO.SlutSted}");
         }
