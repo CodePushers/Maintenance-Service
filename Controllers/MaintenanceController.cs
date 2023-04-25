@@ -5,6 +5,7 @@ using System.Text;
 using RabbitMQ.Client;
 using System.Net;
 using Microsoft.AspNetCore.Connections;
+using Microsoft.AspNetCore.Authorization;
 
 namespace maintenanceService.Controllers;
 
@@ -36,6 +37,7 @@ public class MaintenanceController : ControllerBase
     }
 
     // Opretter en PlanDTO ud fra BookingDTO
+    [Authorize]
     [HttpPost("opretAnmodning")]
     public IActionResult OpretAnmodning([FromBody] Anmodning anmodning)
     {
@@ -108,6 +110,7 @@ public class MaintenanceController : ControllerBase
     }
 
     // Henter CSV-fil
+    [Authorize]
     [HttpGet("modtagRep")]
     public async Task<ActionResult> ModtagReparationPlan()
     {
@@ -132,6 +135,7 @@ public class MaintenanceController : ControllerBase
     }
 
     // Henter CSV-fil
+    [Authorize]
     [HttpGet("modtagService")]
     public async Task<ActionResult> ModtagServicePlan()
     {
@@ -155,6 +159,7 @@ public class MaintenanceController : ControllerBase
 
     }
 
+    [Authorize]
     [HttpGet("version")]
     public IEnumerable<string> Get()
     {
