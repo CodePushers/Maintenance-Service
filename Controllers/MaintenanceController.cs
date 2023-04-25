@@ -32,19 +32,22 @@ public class MaintenanceController : ControllerBase
         var hostName = System.Net.Dns.GetHostName();
         var ips = System.Net.Dns.GetHostAddresses(hostName);
         var _ipaddr = ips.First().MapToIPv4().ToString();
-        _logger.LogInformation(1, $"TaxaBooking responding from {_ipaddr}");
+        _logger.LogInformation(1, $"Maintenance responding from {_ipaddr}");
     }
 
     // Opretter en PlanDTO ud fra BookingDTO
-    [HttpPost("opretbooking")]
-    public IActionResult OpretBooking(BookingDTO bookingDTO)
+    [HttpPost("opretAnmodning")]
+    public IActionResult OpretAnmodning([FromBody] Anmodning anmodning)
     {
-        PlanDTO planDTO = new PlanDTO
+        _logger.LogInformation($"Modtaget anmodningDTO:\n\tAnmodningID: {anmodning.AnmodningID}\n\tKøretøjID: {anmodning.KøretøjID}\n\tBeskrivelse: {anmodning.Beskrivelse}\n\tOpgavetype: {anmodning.OpgaveType}\n\tIndsender: {anmodning.Indsender}");
+
+        AnmodningDTO anmodningDTO = new AnmodningDTO
         {
-            KundeNavn = bookingDTO.KundeNavn,
-            StartTidspunkt = bookingDTO.StartTidspunkt,
-            StartSted = bookingDTO.StartSted,
-            SlutSted = bookingDTO.SlutSted
+            AnmodningID = anmodning.AnmodningID,
+            KøretøjID = anmodning.KøretøjID,
+            Beskrivelse = anmodning.Beskrivelse,
+            OpgaveType = anmodning.OpgaveType,
+            Indsender = anmodning.Indsender
         };
 
         try
@@ -60,29 +63,40 @@ public class MaintenanceController : ControllerBase
 
             channel.ExchangeDeclare(exchange: "FleetService", type: ExchangeType.Topic);
 
-            // Opretter en kø "hello" hvis den ikke allerede findes i vores rabbitmq-server
-            //channel.QueueDeclare(queue: "hello",
-            //                     durable: false,
-            //                     exclusive: false,
-            //                     autoDelete: false,
-            //                     arguments: null);
-
             // Serialiseres til JSON
-            string message = JsonSerializer.Serialize(planDTO);
+            string message = JsonSerializer.Serialize(anmodningDTO);
 
+            _logger.LogInformation($"JsonSerialized message: \n\t{message}");
             // Konverteres til byte-array
             var body = Encoding.UTF8.GetBytes(message);
 
-            // Sendes til hello-køen
-            channel.BasicPublish(exchange: "FleetService",
-                                 routingKey: "PlanDTO",
-                                 basicProperties: null,
-                                 body: body);
+            if (anmodningDTO.OpgaveType == "Service")
+            {
+                // Sendes til Service-køen
+                channel.BasicPublish(exchange: "FleetService",
+                                     routingKey: "ServiceDTO",
+                                     basicProperties: null,
+                                     body: body);
 
+                _logger.LogInformation($"ServiceDTO oprettet og sendt");
 
-            _logger.LogInformation($"PlanDTO oprettet");
+            }
+            else if (anmodningDTO.OpgaveType == "Reparation")
+            {
+                // Sendes til Reparation-køen
+                channel.BasicPublish(exchange: "FleetService",
+                                     routingKey: "ReparationDTO",
+                                     basicProperties: null,
+                                     body: body);
 
-            Console.WriteLine($"[*] Plan sendt:\n\tKundenavn: {planDTO.KundeNavn}\n\tStarttidspunkt: {planDTO.StartTidspunkt}\n\tStartsted: {planDTO.StartSted}\n\tSlutSted: {planDTO.SlutSted}");
+                _logger.LogInformation($"ReparationDTO oprettet og sendt");
+
+            }
+            else
+            {
+                _logger.LogError($"Anmodning ikke sendt! Opgavetype: {anmodningDTO.OpgaveType}");
+            }
+
         }
 
         catch (Exception ex)
@@ -90,22 +104,46 @@ public class MaintenanceController : ControllerBase
             _logger.LogError(ex.Message);
             return StatusCode(500);
         }
-        return Ok(planDTO);
+        return Ok(anmodningDTO);
     }
 
     // Henter CSV-fil
-    [HttpGet("modtag")]
-    public async Task<ActionResult> ModtagPlanDTO()
+    [HttpGet("modtagRep")]
+    public async Task<ActionResult> ModtagReparationPlan()
     {
         try
         {
             //Læser indholdet af CSV-fil fra filsti (_filePath)
-            var bytes = await System.IO.File.ReadAllBytesAsync(Path.Combine(_filePath, "planListe.csv"));
+            var bytes = await System.IO.File.ReadAllBytesAsync(Path.Combine(_filePath, "reparationPlan.csv"));
 
-            _logger.LogInformation("planListe.csv fil modtaget");
+            _logger.LogInformation("reparationPlan.csv fil modtaget");
 
             // Returnere CSV-filen med indholdet
-            return File(bytes, "text/csv", Path.GetFileName(Path.Combine(_filePath, "planListe.csv")));
+            return File(bytes, "text/csv", Path.GetFileName(Path.Combine(_filePath, "reparationPlan.csv")));
+
+        }
+
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return StatusCode(500);
+        }
+
+    }
+
+    // Henter CSV-fil
+    [HttpGet("modtagService")]
+    public async Task<ActionResult> ModtagServicePlan()
+    {
+        try
+        {
+            //Læser indholdet af CSV-fil fra filsti (_filePath)
+            var bytes = await System.IO.File.ReadAllBytesAsync(Path.Combine(_filePath, "servicePlan.csv"));
+
+            _logger.LogInformation("servicePlan.csv fil modtaget");
+
+            // Returnere CSV-filen med indholdet
+            return File(bytes, "text/csv", Path.GetFileName(Path.Combine(_filePath, "servicePlan.csv")));
 
         }
 
